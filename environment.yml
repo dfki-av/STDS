@@ -1,4 +1,4 @@
-name: latte
+name: stds
 channels:
   - pytorch
   - nvidia
