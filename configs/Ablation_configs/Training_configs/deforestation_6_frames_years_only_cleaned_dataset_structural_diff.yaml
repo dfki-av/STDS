@@ -1,0 +1,54 @@
+dataset: "sat"
+
+data_path: "Data path"
+pretrained_model_path: "Your_checkpoint.pt"
+model_special_name: 6_frame_model_deforestation_rgb_diff_normalization
+# save and load
+results_dir: "File path to save your results (trained checkpoints)"
+pretrained:
+model: Latte-XL/2
+num_frames: 6
+in_channels: 4
+image_size: 256 # choices=[256, 512]
+num_sampling_steps: 250
+frame_interval: 1 # keep this to 2 always as the split dataset has only 16 images in each folder
+fixed_spatial: False
+attention_bias: True
+learn_sigma: True
+extras: 4 # [1, 2, 3] 1 unconditional generation, 2 class-conditional generation, 3 : metadata conditioned, 4 : with structure_diff
+months_required: True
+fusion_based_condition: False
+use_guidance_images: False
+use_canny_edge_images: False
+use_histogram_segmentations: False
+use_structural_diff: True
+conditioning_type: adaln_zero_modulation
+# train config:
+save_ceph: True # important
+use_image_num: 8 # important
+learning_rate: 8e-4
+ckpt_every: 5000
+clip_max_norm: 0.1
+start_clip_iter: 20000
+local_batch_size: 2 # important
+max_train_steps: 600000
+global_seed: 3407
+num_workers: 4
+log_every: 50
+lr_warmup_steps: 0
+resume_from_checkpoint:
+gradient_accumulation_steps: 2 # TODO
+num_classes:
+
+# low VRAM and speed up training
+use_compile: False
+mixed_precision: False
+enable_xformers_memory_efficient_attention: False
+gradient_checkpointing: False
+
+
+## regularization configs:
+stochastic_depth_drop_rate: 0
+weight_decay: 0.00
+attention_drop_rate: 0.0
+projection_drop_rate: 0.0

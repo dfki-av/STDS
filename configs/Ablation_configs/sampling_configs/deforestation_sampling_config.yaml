@@ -1,0 +1,62 @@
+# path:
+ckpt: your_trained_model.pt
+save_video_path: Path_to_save_final_video
+file_suffix: 6_frames
+use_single_frame_model: False
+pretrained_model_path: # /netscratch/kashyap/Latte/vae/vae-ft-ema-560000-ema-pruned.ckpt
+image_path: "single_image"
+ip_image_folder: image_folder_path
+ip_image_folder_list: ["Lisf of folders here"]
+# The following paths are not always necessary, they can be removed if not required
+eval_images_path: provide one path with a list of image folders instead of mentioning each path individually (for bulk processing), used in sample_eval.py
+future_images_path: 
+decoded_latents_save_path: latent_images_after_decoded_into_their_original_size_save_path
+frame_wise_save_path: path_to_save_each_frame_from_the_generated_video
+sample_progression_save_path: Paht_to_save_the_ddim_image_generation_progression
+metadata_save_path: meta_data_save_path
+num_ip_images: 6
+# model config: 
+model: Latte-XL/2
+in_channels: 4
+inference_model: Latte-XL/2-inference
+num_frames: 6
+use_guidance_images: False
+use_canny_edge_images: False
+use_histogram_segmentations: False
+use_structural_diff: False
+image_size: 256 # choices=[256, 512]
+frame_interval: 2
+fixed_spatial: False
+attention_bias: True
+learn_sigma: True
+months_required: True
+extras: 3 # [1, 2] 1 unconditional generation, 2 class-conditional generation # 4 
+num_classes:
+fusion_based_condition: False
+start_year: 1945
+init_years_list: [1997] #, 2005, 2015, 2025, 2035, 2045]
+
+start_month : 0
+conditioning_type: adaln_zero_modulation
+inference_mode: "inversion" # inversion and sampling are the two inference modes
+sa_feature_injection_required: False
+# model speedup
+use_compile: False
+use_fp16: False
+# sample config:
+seed:
+sample_method: 'ddim'
+num_sampling_steps: 50
+cfg_scale: 1.0
+run_time: 12
+num_sample: 1
+negative_name:
+cyclic_sample_required: False
+# ddp sample config
+per_proc_batch_size: 1
+num_fvd_samples: 2
+
+stochastic_depth_drop_rate: 0
+weight_decay: 0.01
+attention_drop_rate: 0.2
+projection_drop_rate: 0.1
